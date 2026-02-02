@@ -509,7 +509,7 @@ function RSVPSection({ submitted, setSubmitted }) {
               {accepted ? "Votre présence nous fera beaucoup de joie. À bientôt le 10 avril !" : "Nous espérons vous revoir bientôt. Encore merci pour votre message."}
             </p>
             <Divider tight />
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Gabriella & Deogratias</p>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Deogratias & Gabriella</p>
           </div>
         )}
       </div>
@@ -596,7 +596,7 @@ export default function App() {
 
           <footer style={{ textAlign: "center", padding: "52px 24px 64px", background: C.cream, position: "relative" }}>
             <Divider />
-            <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 400, color: C.charcoal, margin: "18px 0 4px" }}>Gabriella & Deogratias</p>
+            <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 400, color: C.charcoal, margin: "18px 0 4px" }}>Deogratias & Gabriella</p>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: C.soft, margin: 0 }}>10 Avril 2026</p>
           </footer>
 
