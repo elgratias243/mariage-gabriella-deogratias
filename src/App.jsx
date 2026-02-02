@@ -311,7 +311,7 @@ function TeaserSection() {
             Parce que les moments les plus précieux se partagent en toute intimité, nous avons imaginé une journée à notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entourée de ceux qui comptent vraiment.
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: "18px 0 0" }}>
-            De la mairie aux éclats de rire du vin d'honneur, jusqu'à la douceur du soir... Rejoignez-nous pour écrire cette nouvelle page.
+            De nos promesses officielles à l'émotion de la bénédiction, jusqu'aux éclats de rire du vin d'honneur et la douceur du soir... Rejoignez-nous pour écrire cette nouvelle page.
           </p>
         </div>
         <Divider />
