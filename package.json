@@ -19,19 +19,3 @@
   }
 }
 ```
-
-4. Cliquez **"Commit Changes"**
-
-### Ajouter `vite.config.js`
-1. **"Add file"** → **"New file"**
-2. Nom : `vite.config.js`
-3. Contenu :
-
-```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-})
-```
