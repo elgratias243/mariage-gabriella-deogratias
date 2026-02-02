@@ -12,11 +12,11 @@ const C = {
 };
 
 const timeline = [
-  { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant l'Officier de l'Etat-Civil, le premier chapitre de notre histoire à deux." },
-  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits précieux avec tous ceux qui comptent." },
+  { time: "13h00", title: "Le Grand "Oui"", icon: "⚖️", lieu: "Mairie de Bezons", desc: "C'est ici que tout commence, devant l’Officier de l’État-Civil, pour sceller notre union officielle." },
+  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "On prend le temps d'immortaliser ce bonheur ! Quelques photos en famille et entre amis pour garder une trace indélébile de vos plus beaux sourires." },
   { time: "14h30", title: "Bénédiction Nuptiale", icon: "🤵🏽💍👰", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
-  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
-  { time: "21h00", title: "Fin de Soirée", icon: "🌙", lieu: "", desc: "On se sépare sur une note douce. Merci d'avoir partagé cette journée avec nous." },
+  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", icon: "🥂", desc: "Des éclats de rire, de la convivialité et la joie simple d'être ensemble. On trinque, on papote et on profite !" },
+  { time: "21h00", title: "Clap de fin", icon: "🌙", lieu: "", desc: "On se quitte le cœur rempli de souvenirs, sur une note douce pour clore cette belle journée. Merci de l'avoir partagée avec nous." },
 ];
 
 const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Pétillante"];
