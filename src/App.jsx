@@ -12,19 +12,19 @@ const C = {
 };
 
 const timeline = [
-  { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant le maire — le premier chapitre de notre histoire à deux." },
+  { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant l'Officier de l'Etat-Civil, le premier chapitre de notre histoire à deux." },
   { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits précieux avec tous ceux qui comptent." },
-  { time: "14h30", title: "Bénédiction Nuptiale", icon: "✨", lieu: "Restaurant 3M — Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
-  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant 3M — Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel — juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
+  { time: "14h30", title: "Bénédiction Nuptiale", icon: "✨", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
+  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
   { time: "21h00", title: "Fin de Soirée", icon: "🌙", lieu: "", desc: "On se sépare sur une note douce. Merci d'avoir partagé cette journée avec nous." },
 ];
 
 const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Pétillante"];
-const allergens = ["Gluten", "Lactose", "Noix", "Fruits de Mer", "Œufs", "Soja", "Aucune allergie"];
+const allergens = ["Gluten", "Lactose", "Noix", "Œufs", "Aucune allergie"];
 
 const biblQuote = {
-  fr: "« Où que tu ailles, j'irai. Où que tu t'arrêtes, je m'arrêterai.\nTon peuple sera mon peuple et ton Dieu sera mon Dieu. »",
-  ref: "— Ruth 1:16",
+  fr: "« C'est par l sagesse qu'une maison s'élève,\net par l'intelligence qu'elle s'affermit. »",
+  ref: "— Proverbes 24:3",
 };
 
 // Photos du couple (à remplacer par vos vraies photos)
