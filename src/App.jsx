@@ -80,57 +80,27 @@ function BackgroundCarousel() {
   }, []);
 
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: -1, overflow: "hidden" }}>
+    <div style={{ position: "fixed", inset: 0, zIndex: -1, backgroundColor: C.cream, overflow: "hidden" }}>
       {BG_PHOTOS.map((photo, i) => (
         <div key={i} style={{
           position: "absolute", inset: 0,
           backgroundImage: `url(${photo})`,
-          backgroundSize: "cover", backgroundPosition: "center",
-          opacity: i === currentIndex ? 0.08 : 0,
-          transition: "opacity 2s ease-in-out",
-          filter: "grayscale(0.3) blur(2px)",
+          backgroundSize: "cover", 
+          backgroundPosition: "center",
+          opacity: i === currentIndex ? 0.12 : 0, 
+          transition: "opacity 2.5s ease-in-out",
+          filter: "grayscale(0.5) blur(1px)",
+          mixBlendMode: "multiply", 
         }} />
       ))}
-      {/* Overlay pour assurer la lisibilité */}
-      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, ${C.cream}f5 0%, ${C.cream}dd 100%)` }} />
+      <div style={{ 
+        position: "absolute", 
+        inset: 0, 
+        background: `linear-gradient(180deg, ${C.cream}66 0%, ${C.cream} 100%)`,
+        pointerEvents: "none"
+      }} />
     </div>
   );
-}
-
-function Particles() {
-  const [pts] = useState(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i, x: Math.random() * 100, y: Math.random() * 100,
-      s: 3 + Math.random() * 10, d: 5 + Math.random() * 7, del: Math.random() * 5,
-    }))
-  );
-  return (
-    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-      {pts.map((p) => (
-        <div key={p.id} style={{
-          position: "absolute", left: `${p.x}%`, top: `${p.y}%`,
-          width: p.s, height: p.s, borderRadius: "50%",
-          background: `radial-gradient(circle, ${C.goldLight}66, transparent)`,
-          animation: `drift ${p.d}s ease-in-out ${p.del}s infinite alternate`,
-        }} />
-      ))}
-      <style>{`@keyframes drift { 0%{transform:translateY(0) scale(1);opacity:.25} 100%{transform:translateY(-50px) scale(1.4);opacity:.65} }`}</style>
-    </div>
-  );
-}
-
-function Divider({ tight }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, margin: tight ? "16px 0" : "28px 0" }}>
-      <div style={{ width: 52, height: 1, background: `linear-gradient(90deg, transparent, ${C.gold})` }} />
-      <div style={{ width: 7, height: 7, border: `1.5px solid ${C.gold}`, borderRadius: 1.5, transform: "rotate(45deg)" }} />
-      <div style={{ width: 52, height: 1, background: `linear-gradient(270deg, transparent, ${C.gold})` }} />
-    </div>
-  );
-}
-
-function Label({ children, top = 0 }) {
-  return <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13.5, color: C.soft, letterSpacing: 1.2, textTransform: "uppercase", margin: `${top}px 0 10px` }}>{children}</p>;
 }
 
 function Chips({ options, selected, onTog, color }) {
