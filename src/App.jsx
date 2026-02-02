@@ -70,7 +70,6 @@ async function incrementVisits() {
 
 // Carrousel de photos en arrière-plan
 function BackgroundCarousel() {
-  function BackgroundCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
