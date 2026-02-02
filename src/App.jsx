@@ -86,9 +86,9 @@ function BackgroundCarousel() {
           position: "absolute", inset: 0,
           backgroundImage: `url(${photo})`,
           backgroundSize: "cover", backgroundPosition: "center",
-          opacity: i === currentIndex ? 0.08 : 0,
+          opacity: i === currentIndex ? 0.5 : 0,
           transition: "opacity 2s ease-in-out",
-          filter: "grayscale(0.3) blur(2px)",
+          filter: "grayscale(0) blur(0px)",
         }} />
       ))}
       {/* Overlay pour assurer la lisibilité */}
