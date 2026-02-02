@@ -14,7 +14,7 @@ const C = {
 const timeline = [
   { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant l'Officier de l'Etat-Civil, le premier chapitre de notre histoire à deux." },
   { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits précieux avec tous ceux qui comptent." },
-  { time: "14h30", title: "Bénédiction Nuptiale", icon: "✨", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
+  { time: "14h30", title: "Bénédiction Nuptiale", icon: "🤵🏽💍👰", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
   { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant les 3M à Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
   { time: "21h00", title: "Fin de Soirée", icon: "🌙", lieu: "", desc: "On se sépare sur une note douce. Merci d'avoir partagé cette journée avec nous." },
 ];
@@ -266,9 +266,9 @@ function Hero({ onOpen }) {
         </p>
         <h1 style={{ fontFamily: "'Playfair Display',serif", fontWeight: 400, lineHeight: 1.2, margin: 0, color: C.white }}>
           <span style={{ display: "block", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(18px,4vw,24px)", color: C.goldLight, marginBottom: 10 }}>le mariage de</span>
-          <span style={{ display: "block", fontSize: "clamp(52px,13vw,96px)", textShadow: "0 2px 40px rgba(0,0,0,.3)" }}>Gabriella</span>
-          <span style={{ display: "inline-block", fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(22px,5vw,32px)", color: C.gold, margin: "2px 0", letterSpacing: 4 }}>&</span>
           <span style={{ display: "block", fontSize: "clamp(52px,13vw,96px)", textShadow: "0 2px 40px rgba(0,0,0,.3)" }}>Deogratias</span>
+          <span style={{ display: "inline-block", fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(22px,5vw,32px)", color: C.gold, margin: "2px 0", letterSpacing: 4 }}>&</span>
+          <span style={{ display: "block", fontSize: "clamp(52px,13vw,96px)", textShadow: "0 2px 40px rgba(0,0,0,.3)" }}>Gabriella</span>
         </h1>
         <Divider />
         <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(16px,3vw,19px)", color: `${C.goldLight}cc`, letterSpacing: 2, marginBottom: 4 }}>10 Avril 2026</p>
@@ -311,7 +311,7 @@ function TeaserSection() {
             Parce que les moments les plus précieux se partagent en toute intimité, nous avons imaginé une journée à notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entourée de ceux qui comptent vraiment.
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: "18px 0 0" }}>
-            De la mairie aux éclats de rire du vin d'honneur, jusqu'à la douceur du soir — rejoignez-nous pour écrire cette nouvelle page.
+            De la mairie aux éclats de rire du vin d'honneur, jusqu'à la douceur du soir... Rejoignez-nous pour écrire cette nouvelle page.
           </p>
         </div>
         <Divider />
