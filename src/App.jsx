@@ -12,20 +12,29 @@ const C = {
 };
 
 const timeline = [
-  { time: "13h00", title: "Ceremonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant le maire — le premier chapitre de notre histoire a deux." },
-  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits precieux avec tous ceux qui comptent." },
-  { time: "14h30", title: "Benediction Nuptiale", icon: "✨", lieu: "Restaurant 3M — Cormeilles-en-Parisis", desc: "Une ceremonie religieuse empreinte de recueillement et de serenite." },
-  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant 3M — Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, eclats de rire et beaux moments partages. Pas de repas formel — juste la convivialite, les bonnes conversations et la joie d'etre ensemble." },
-  { time: "21h00", title: "Fin de Soiree", icon: "🌙", lieu: "", desc: "On se separe sur une note douce. Merci d'avoir partage cette journee avec nous." },
+  { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant le maire — le premier chapitre de notre histoire à deux." },
+  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits précieux avec tous ceux qui comptent." },
+  { time: "14h30", title: "Bénédiction Nuptiale", icon: "✨", lieu: "Restaurant 3M — Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
+  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant 3M — Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel — juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
+  { time: "21h00", title: "Fin de Soirée", icon: "🌙", lieu: "", desc: "On se sépare sur une note douce. Merci d'avoir partagé cette journée avec nous." },
 ];
 
-const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Petillante"];
-const allergens = ["Gluten", "Lactose", "Noix", "Fruits de Mer", "Oeufs", "Soja", "Aucune allergie"];
+const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Pétillante"];
+const allergens = ["Gluten", "Lactose", "Noix", "Fruits de Mer", "Œufs", "Soja", "Aucune allergie"];
 
 const biblQuote = {
-  fr: "Ou que tu ailles, j'irai. Ou que tu t'arretes, je m'arreterai. Ton peuple sera mon peuple et ton Dieu sera mon Dieu.",
+  fr: "« Où que tu ailles, j'irai. Où que tu t'arrêtes, je m'arrêterai.\nTon peuple sera mon peuple et ton Dieu sera mon Dieu. »",
   ref: "— Ruth 1:16",
 };
+
+// Photos du couple (à remplacer par vos vraies photos)
+const HERO_PHOTO = "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80"; // Photo principale
+const BG_PHOTOS = [
+  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80",
+  "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&q=80",
+  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=80",
+  "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=80",
+];
 
 const STORAGE_KEY = "wedding-rsvp-responses";
 const VISITS_KEY = "wedding-visit-count";
@@ -37,13 +46,7 @@ async function saveRSVP(guestData, accepted) {
       const existing = await window.storage.get(STORAGE_KEY, true);
       if (existing?.value) responses = JSON.parse(existing.value);
     } catch (e) {}
-
-    const entry = {
-      id: Date.now(),
-      timestamp: new Date().toISOString(),
-      accepted,
-      guests: guestData,
-    };
+    const entry = { id: Date.now(), timestamp: new Date().toISOString(), accepted, guests: guestData };
     responses.push(entry);
     await window.storage.set(STORAGE_KEY, JSON.stringify(responses), true);
     return true;
@@ -63,6 +66,35 @@ async function incrementVisits() {
     count++;
     await window.storage.set(VISITS_KEY, String(count), true);
   } catch (e) { console.error(e); }
+}
+
+// Carrousel de photos en arrière-plan
+function BackgroundCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % BG_PHOTOS.length);
+    }, 8000); // Change toutes les 8 secondes
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: -1, overflow: "hidden" }}>
+      {BG_PHOTOS.map((photo, i) => (
+        <div key={i} style={{
+          position: "absolute", inset: 0,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover", backgroundPosition: "center",
+          opacity: i === currentIndex ? 0.08 : 0,
+          transition: "opacity 2s ease-in-out",
+          filter: "grayscale(0.3) blur(2px)",
+        }} />
+      ))}
+      {/* Overlay pour assurer la lisibilité */}
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, ${C.cream}f5 0%, ${C.cream}dd 100%)` }} />
+    </div>
+  );
 }
 
 function Particles() {
@@ -118,6 +150,98 @@ function Chips({ options, selected, onTog, color }) {
   );
 }
 
+// NOUVELLE SECTION : Photo pleine page du couple
+function CouplePhoto({ onContinue }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 300);
+  }, []);
+
+  return (
+    <section style={{
+      position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
+      overflow: "hidden", background: "#0a0a0a",
+    }}>
+      {/* Photo principale */}
+      <div style={{
+        position: "absolute", inset: 0,
+        backgroundImage: `url(${HERO_PHOTO})`,
+        backgroundSize: "cover", backgroundPosition: "center",
+        opacity: visible ? 0.85 : 0,
+        transition: "opacity 1.8s ease-out",
+        filter: "brightness(0.75)",
+      }} />
+
+      {/* Overlay gradient */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.6) 100%)",
+      }} />
+
+      {/* Vignette subtile */}
+      <div style={{
+        position: "absolute", inset: 0,
+        boxShadow: "inset 0 0 200px rgba(0,0,0,0.4)",
+      }} />
+
+      {/* Contenu centré */}
+      <div style={{
+        position: "relative", zIndex: 2, textAlign: "center", padding: "0 24px",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(30px)",
+        transition: "all 1.5s cubic-bezier(.22,1,.36,1) 0.5s",
+      }}>
+        <p style={{
+          fontFamily: "'Cormorant Garamond',serif", fontSize: 15, letterSpacing: 6,
+          textTransform: "uppercase", color: `${C.goldLight}dd`, marginBottom: 24,
+          textShadow: "0 2px 12px rgba(0,0,0,0.8)",
+        }}>
+          10 Avril 2026
+        </p>
+
+        <h1 style={{
+          fontFamily: "'Playfair Display',serif", fontSize: "clamp(36px,8vw,64px)",
+          fontWeight: 400, color: C.white, lineHeight: 1.3, margin: 0,
+          textShadow: "0 4px 30px rgba(0,0,0,0.9)",
+        }}>
+          Gabriella & Deogratias
+        </h1>
+
+        <button onClick={onContinue} style={{
+          marginTop: 48, fontFamily: "'Cormorant Garamond',serif", fontSize: 14, letterSpacing: 4,
+          textTransform: "uppercase", background: "rgba(201,168,76,0.15)", backdropFilter: "blur(10px)",
+          border: `1.5px solid ${C.gold}`, color: C.gold, padding: "14px 40px", borderRadius: 40,
+          cursor: "pointer", transition: "all .4s ease",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = C.gold; e.currentTarget.style.color = C.white; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(201,168,76,0.15)"; e.currentTarget.style.color = C.gold; }}
+        >
+          Continuer
+        </button>
+      </div>
+
+      {/* Scroll indicator */}
+      <div style={{
+        position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)",
+        opacity: visible ? 0.6 : 0, transition: "opacity 2s ease 2s",
+      }}>
+        <div style={{
+          width: 22, height: 36, border: `2px solid ${C.goldLight}88`, borderRadius: 12,
+          display: "flex", justifyContent: "center", paddingTop: 8,
+        }}>
+          <div style={{
+            width: 3, height: 8, borderRadius: 2, background: C.goldLight,
+            animation: "scrollBounce 1.8s ease infinite",
+          }} />
+        </div>
+      </div>
+      <style>{`@keyframes scrollBounce { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(12px)} }`}</style>
+    </section>
+  );
+}
+
 function Hero({ onOpen }) {
   const [in_, setIn] = useState(false);
   useEffect(() => { setTimeout(() => setIn(true), 120); }, []);
@@ -138,7 +262,7 @@ function Hero({ onOpen }) {
         transition: "opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1)",
       }}>
         <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, letterSpacing: 5, textTransform: "uppercase", color: `${C.goldLight}aa`, marginBottom: 20 }}>
-          Vous etes invites a celebrer
+          Vous êtes invités à célébrer
         </p>
         <h1 style={{ fontFamily: "'Playfair Display',serif", fontWeight: 400, lineHeight: 1.2, margin: 0, color: C.white }}>
           <span style={{ display: "block", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(18px,4vw,24px)", color: C.goldLight, marginBottom: 10 }}>le mariage de</span>
@@ -148,7 +272,7 @@ function Hero({ onOpen }) {
         </h1>
         <Divider />
         <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(16px,3vw,19px)", color: `${C.goldLight}cc`, letterSpacing: 2, marginBottom: 4 }}>10 Avril 2026</p>
-        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: `${C.goldLight}88`, letterSpacing: 1 }}>A partir de 13h00</p>
+        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: `${C.goldLight}88`, letterSpacing: 1 }}>À partir de 13h00</p>
 
         <button onClick={onOpen} style={{
           marginTop: 44, fontFamily: "'Cormorant Garamond',serif", fontSize: 14, letterSpacing: 4, textTransform: "uppercase",
@@ -157,7 +281,7 @@ function Hero({ onOpen }) {
         }}
           onMouseEnter={e => { e.currentTarget.style.background = C.gold; e.currentTarget.style.color = C.white; }}
           onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.gold; }}
-        >Decouvrir</button>
+        >Découvrir</button>
       </div>
 
       <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", zIndex: 2, opacity: in_ ? .5 : 0, transition: "opacity 2s ease 1.5s" }}>
@@ -180,14 +304,14 @@ function TeaserSection() {
   }, []);
 
   return (
-    <section ref={ref} style={{ padding: "90px 24px", background: C.cream }}>
+    <section ref={ref} style={{ padding: "90px 24px", background: C.cream, position: "relative" }}>
       <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
         <div style={{ opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(24px)", transition: "all .9s cubic-bezier(.22,1,.36,1)" }}>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: 0 }}>
-            Parce que les moments les plus precieux se partagent en toute intimite, nous avons imagine une journee a notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entouree de ceux qui comptent vraiment.
+            Parce que les moments les plus précieux se partagent en toute intimité, nous avons imaginé une journée à notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entourée de ceux qui comptent vraiment.
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: "18px 0 0" }}>
-            De la mairie aux eclats de rire du vin d'honneur, jusqu'a la douceur du soir — rejoignez-nous pour ecrire cette nouvelle page.
+            De la mairie aux éclats de rire du vin d'honneur, jusqu'à la douceur du soir — rejoignez-nous pour écrire cette nouvelle page.
           </p>
         </div>
         <Divider />
@@ -199,7 +323,7 @@ function TeaserSection() {
         }}>
           <div style={{ position: "absolute", top: -18, left: -18, width: 60, height: 60, borderRadius: "50%", background: `radial-gradient(circle, ${C.goldLight}33, transparent)` }} />
           <span style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 38, color: C.gold, lineHeight: 0.6, display: "block", marginBottom: 12 }}>"</span>
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "clamp(17px,3vw,20px)", color: C.charcoal, lineHeight: 1.75, margin: 0 }}>
+          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "clamp(17px,3vw,20px)", color: C.charcoal, lineHeight: 1.75, margin: 0, whiteSpace: "pre-line" }}>
             {biblQuote.fr}
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 14, color: C.gold, letterSpacing: 1, marginTop: 16, marginBottom: 0 }}>{biblQuote.ref}</p>
@@ -223,10 +347,10 @@ function TimelineSection() {
   }, []);
 
   return (
-    <section style={{ padding: "80px 24px 90px", background: `linear-gradient(180deg, ${C.cream} 0%, ${C.creamDark} 100%)` }}>
+    <section style={{ padding: "80px 24px 90px", background: `linear-gradient(180deg, ${C.cream} 0%, ${C.creamDark} 100%)`, position: "relative" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(26px,5.5vw,38px)", fontWeight: 400, color: C.charcoal, textAlign: "center", margin: "0 0 6px" }}>
-          Le deroule de la journee
+          Le déroulé de la journée
         </h2>
         <Divider />
         <div style={{ position: "relative", marginTop: 48 }}>
@@ -286,20 +410,20 @@ function RSVPSection({ submitted, setSubmitted }) {
   };
 
   return (
-    <section style={{ minHeight: "100vh", padding: "80px 24px 100px", background: `linear-gradient(180deg, ${C.creamDark} 0%, ${C.cream} 100%)`, display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <section style={{ minHeight: "100vh", padding: "80px 24px 100px", background: `linear-gradient(180deg, ${C.creamDark} 0%, ${C.cream} 100%)`, display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
       <div style={{ maxWidth: 660, width: "100%", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(24px,5vw,36px)", fontWeight: 400, color: C.charcoal, margin: "0 0 6px" }}>
-          Repondre a l'invitation
+          Répondre à l'invitation
         </h2>
         <Divider />
 
         {step === 0 && (
           <div style={{ opacity: anim ? 0 : 1, transform: anim ? "translateY(10px)" : "translateY(0)", transition: "all .32s ease", marginTop: 40 }}>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 19, color: C.soft, marginBottom: 40 }}>
-              Souhaitez-vous nous faire l'honneur de votre presence ?
+              Souhaitez-vous nous faire l'honneur de votre présence ?
             </p>
             <div style={{ display: "flex", gap: 18, justifyContent: "center", flexWrap: "wrap" }}>
-              {[{ lbl: "Avec joie !", val: true, ico: "💐" }, { lbl: "Desole, absent", val: false, ico: "🌹" }].map((o) => {
+              {[{ lbl: "Avec joie !", val: true, ico: "💐" }, { lbl: "Désolé, absent", val: false, ico: "🌹" }].map((o) => {
                 const sel = accepted === o.val;
                 return (
                   <button key={String(o.val)} onClick={() => setAccepted(o.val)} style={{
@@ -318,7 +442,7 @@ function RSVPSection({ submitted, setSubmitted }) {
             </div>
             {accepted !== null && (
               <div style={{ marginTop: 38, animation: "pop .4s cubic-bezier(.22,1,.36,1)" }}>
-                <button onClick={() => { if (accepted) transition(() => setStep(1)); else { saveRSVP([{ name: "Invite anonyme", drinks: [], allergies: [], song: "" }], false); setStep(2); setSubmitted(true); } }}
+                <button onClick={() => { if (accepted) transition(() => setStep(1)); else { saveRSVP([{ name: "Invité anonyme", drinks: [], allergies: [], song: "" }], false); setStep(2); setSubmitted(true); } }}
                   style={{
                     fontFamily: "'Cormorant Garamond',serif", fontSize: 15, letterSpacing: 3.5, textTransform: "uppercase",
                     background: C.gold, color: C.white, border: "none", padding: "13px 44px", borderRadius: 40, cursor: "pointer",
@@ -336,17 +460,17 @@ function RSVPSection({ submitted, setSubmitted }) {
         {step === 1 && (
           <div style={{ opacity: anim ? 0 : 1, transform: anim ? "translateY(10px)" : "translateY(0)", transition: "all .32s ease", marginTop: 36, textAlign: "left" }}>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 18, color: C.soft, textAlign: "center", marginBottom: 34 }}>
-              Completez les details pour chaque invite
+              Complétez les détails pour chaque invité
             </p>
             {guests.map((g, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 22, padding: "28px 24px", marginBottom: 18, border: `1px solid ${C.goldLight}44`, boxShadow: "0 4px 22px rgba(0,0,0,.05)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
-                  <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 16, color: C.gold }}>Invite {i + 1}</span>
+                  <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 16, color: C.gold }}>Invité {i + 1}</span>
                   {i > 0 && <button onClick={() => setGuests(guests.filter((_, x) => x !== i))} style={{ background: "none", border: "none", color: C.blush, cursor: "pointer", fontSize: 20 }}>✕</button>}
                 </div>
-                <input type="text" placeholder="Prenom & Nom" value={g.name} onChange={(e) => upd(i, "name", e.target.value)}
+                <input type="text" placeholder="Prénom & Nom" value={g.name} onChange={(e) => upd(i, "name", e.target.value)}
                   style={{ width: "100%", boxSizing: "border-box", padding: "12px 16px", borderRadius: 14, border: `1px solid ${C.goldLight}88`, fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.charcoal, background: C.cream, outline: "none", marginBottom: 22 }} />
-                <Label>🥂 Preference de boisson</Label>
+                <Label>🥂 Préférence de boisson</Label>
                 <Chips options={drinks} selected={g.drinks} onTog={(v) => tog(i, "drinks", v)} color={C.gold} />
                 <Label top={22}>⚠️ Allergies alimentaires</Label>
                 <Chips options={allergens} selected={g.allergies} onTog={(v) => tog(i, "allergies", v)} color={C.blush} />
@@ -357,7 +481,7 @@ function RSVPSection({ submitted, setSubmitted }) {
             ))}
             <div style={{ textAlign: "center", marginTop: 8 }}>
               <button onClick={addGuest} style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, background: "transparent", border: `1px dashed ${C.gold}`, color: C.gold, padding: "10px 26px", borderRadius: 32, cursor: "pointer" }}>
-                + Ajouter un invite
+                + Ajouter un invité
               </button>
             </div>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", marginTop: 38 }}>
@@ -382,7 +506,7 @@ function RSVPSection({ submitted, setSubmitted }) {
               {accepted ? "Merci !" : "Nous le regrettons"}
             </h3>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 18, color: C.soft, maxWidth: 440, margin: "0 auto", lineHeight: 1.7 }}>
-              {accepted ? "Votre presence nous fera beaucoup de joie. A bientot le 10 avril !" : "Nous esperons vous revoir bientot. Encore merci pour votre message."}
+              {accepted ? "Votre présence nous fera beaucoup de joie. À bientôt le 10 avril !" : "Nous espérons vous revoir bientôt. Encore merci pour votre message."}
             </p>
             <Divider tight />
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Gabriella & Deogratias</p>
@@ -415,7 +539,7 @@ function StickyRSVP({ onClick, show }) {
 }
 
 export default function App() {
-  const [page, setPage] = useState("hero");
+  const [page, setPage] = useState("photo"); // photo → hero → main
   const [tab, setTab] = useState("teaser");
   const [submitted, setSubmitted] = useState(false);
   const rsvpRef = useRef(null);
@@ -436,15 +560,22 @@ export default function App() {
         html { scroll-behavior: smooth; }
       `}</style>
 
+      {/* Photo du couple en premier */}
+      {page === "photo" && <CouplePhoto onContinue={() => setPage("hero")} />}
+
+      {/* Page Hero classique */}
       {page === "hero" && <Hero onOpen={() => setPage("main")} />}
 
+      {/* Page principale avec carrousel en arrière-plan */}
       {page === "main" && (
         <>
+          <BackgroundCarousel />
+          
           <nav style={{ position: "sticky", top: 0, zIndex: 100, background: `${C.cream}ee`, backdropFilter: "blur(14px)", borderBottom: `1px solid ${C.goldLight}55`, padding: "15px 0" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               {[
                 { k: "teaser", lbl: "Notre histoire", ico: "🌸" },
-                { k: "timeline", lbl: "Deroule", ico: "✨" },
+                { k: "timeline", lbl: "Déroulé", ico: "✨" },
                 { k: "rsvp", lbl: "RSVP", ico: "💌" },
               ].map((t) => (
                 <button key={t.k} onClick={() => setTab(t.k)} style={{
@@ -463,7 +594,7 @@ export default function App() {
           {tab === "timeline" && <TimelineSection />}
           {tab === "rsvp" && <div ref={rsvpRef}><RSVPSection submitted={submitted} setSubmitted={setSubmitted} /></div>}
 
-          <footer style={{ textAlign: "center", padding: "52px 24px 64px", background: C.cream }}>
+          <footer style={{ textAlign: "center", padding: "52px 24px 64px", background: C.cream, position: "relative" }}>
             <Divider />
             <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 400, color: C.charcoal, margin: "18px 0 4px" }}>Gabriella & Deogratias</p>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: C.soft, margin: 0 }}>10 Avril 2026</p>
