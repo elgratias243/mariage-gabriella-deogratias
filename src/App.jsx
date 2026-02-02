@@ -575,7 +575,7 @@ export default function App() {
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               {[
                 { k: "teaser", lbl: "Notre histoire", ico: "🌸" },
-                { k: "timeline", lbl: "Déroulé", ico: "✨" },
+                { k: "timeline", lbl: "Déroulé", ico: "" },
                 { k: "rsvp", lbl: "RSVP", ico: "💌" },
               ].map((t) => (
                 <button key={t.k} onClick={() => setTab(t.k)} style={{
