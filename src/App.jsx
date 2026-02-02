@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-// ─── PALETTE ──────────────────────────────────────────────
 const C = {
   cream: "#F9F5EF",
   creamDark: "#EDE6D9",
@@ -13,35 +12,32 @@ const C = {
 };
 
 const timeline = [
-  { time: "13h00", title: "Cérémonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant le maire — le premier chapitre de notre histoire à deux." },
-  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits précieux avec tous ceux qui comptent." },
-  { time: "14h30", title: "Bénédiction Nuptiale", icon: "✨", lieu: "Restaurant 3M — Cormeilles-en-Parisis", desc: "Une cérémonie religieuse empreinte de recueillement et de sérénité." },
-  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant 3M — Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, éclats de rire et beaux moments partagés. Pas de repas formel — juste la convivialité, les bonnes conversations et la joie d'être ensemble." },
-  { time: "21h00", title: "Fin de Soirée", icon: "🌙", lieu: "", desc: "On se sépare sur une note douce. Merci d'avoir partagé cette journée avec nous." },
+  { time: "13h00", title: "Ceremonie Civile", icon: "⚖️", lieu: "Mairie de Bezons", desc: "L'union officielle devant le maire — le premier chapitre de notre histoire a deux." },
+  { time: "13h45", title: "Photos Famille & Amis", icon: "📷", lieu: "Mairie de Bezons", desc: "Des portraits precieux avec tous ceux qui comptent." },
+  { time: "14h30", title: "Benediction Nuptiale", icon: "✨", lieu: "Restaurant 3M — Cormeilles-en-Parisis", desc: "Une ceremonie religieuse empreinte de recueillement et de serenite." },
+  { time: "16h00", title: "Vin d'Honneur", lieu: "Restaurant 3M — Cormeilles-en-Parisis", icon: "🥂", desc: "Mignardises, cocktails, eclats de rire et beaux moments partages. Pas de repas formel — juste la convivialite, les bonnes conversations et la joie d'etre ensemble." },
+  { time: "21h00", title: "Fin de Soiree", icon: "🌙", lieu: "", desc: "On se separe sur une note douce. Merci d'avoir partage cette journee avec nous." },
 ];
 
-const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Pétillante"];
-const allergens = ["Gluten", "Lactose", "Noix", "Fruits de Mer", "Œufs", "Soja", "Aucune allergie"];
+const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Jus Frais", "Eau Petillante"];
+const allergens = ["Gluten", "Lactose", "Noix", "Fruits de Mer", "Oeufs", "Soja", "Aucune allergie"];
 
 const biblQuote = {
-  fr: "« Où que tu ailles, j'irai. Où que tu t'arrêtes, je m'arrêterai.\nTon peuple sera mon peuple et ton Dieu sera mon Dieu. »",
+  fr: "Ou que tu ailles, j'irai. Ou que tu t'arretes, je m'arreterai. Ton peuple sera mon peuple et ton Dieu sera mon Dieu.",
   ref: "— Ruth 1:16",
 };
 
-// ─── PERSISTENT STORAGE HELPERS ───────────────────────────
 const STORAGE_KEY = "wedding-rsvp-responses";
 const VISITS_KEY = "wedding-visit-count";
 
 async function saveRSVP(guestData, accepted) {
   try {
-    // Load existing responses
     let responses = [];
     try {
-      const existing = await window.storage.get(STORAGE_KEY, true); // shared = true so dashboard reads it
+      const existing = await window.storage.get(STORAGE_KEY, true);
       if (existing?.value) responses = JSON.parse(existing.value);
-    } catch (e) { /* first entry */ }
+    } catch (e) {}
 
-    // Add new entry
     const entry = {
       id: Date.now(),
       timestamp: new Date().toISOString(),
@@ -63,13 +59,12 @@ async function incrementVisits() {
     try {
       const v = await window.storage.get(VISITS_KEY, true);
       if (v?.value) count = parseInt(v.value, 10);
-    } catch (e) { /* first visit */ }
+    } catch (e) {}
     count++;
     await window.storage.set(VISITS_KEY, String(count), true);
   } catch (e) { console.error(e); }
 }
 
-// ─── COMPONENTS ───────────────────────────────────────────
 function Particles() {
   const [pts] = useState(() =>
     Array.from({ length: 20 }, (_, i) => ({
@@ -123,7 +118,6 @@ function Chips({ options, selected, onTog, color }) {
   );
 }
 
-// ─── HERO ─────────────────────────────────────────────────
 function Hero({ onOpen }) {
   const [in_, setIn] = useState(false);
   useEffect(() => { setTimeout(() => setIn(true), 120); }, []);
@@ -144,7 +138,7 @@ function Hero({ onOpen }) {
         transition: "opacity 1.4s cubic-bezier(.22,1,.36,1), transform 1.4s cubic-bezier(.22,1,.36,1)",
       }}>
         <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, letterSpacing: 5, textTransform: "uppercase", color: `${C.goldLight}aa`, marginBottom: 20 }}>
-          Vous êtes invités à célébrer
+          Vous etes invites a celebrer
         </p>
         <h1 style={{ fontFamily: "'Playfair Display',serif", fontWeight: 400, lineHeight: 1.2, margin: 0, color: C.white }}>
           <span style={{ display: "block", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontWeight: 300, fontSize: "clamp(18px,4vw,24px)", color: C.goldLight, marginBottom: 10 }}>le mariage de</span>
@@ -154,7 +148,7 @@ function Hero({ onOpen }) {
         </h1>
         <Divider />
         <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(16px,3vw,19px)", color: `${C.goldLight}cc`, letterSpacing: 2, marginBottom: 4 }}>10 Avril 2026</p>
-        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: `${C.goldLight}88`, letterSpacing: 1 }}>À partir de 13h00</p>
+        <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: `${C.goldLight}88`, letterSpacing: 1 }}>A partir de 13h00</p>
 
         <button onClick={onOpen} style={{
           marginTop: 44, fontFamily: "'Cormorant Garamond',serif", fontSize: 14, letterSpacing: 4, textTransform: "uppercase",
@@ -163,7 +157,7 @@ function Hero({ onOpen }) {
         }}
           onMouseEnter={e => { e.currentTarget.style.background = C.gold; e.currentTarget.style.color = C.white; }}
           onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.gold; }}
-        >Découvrir</button>
+        >Decouvrir</button>
       </div>
 
       <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", zIndex: 2, opacity: in_ ? .5 : 0, transition: "opacity 2s ease 1.5s" }}>
@@ -176,7 +170,6 @@ function Hero({ onOpen }) {
   );
 }
 
-// ─── TEASER + BIBLE ───────────────────────────────────────
 function TeaserSection() {
   const [vis, setVis] = useState(false);
   const ref = useRef();
@@ -191,10 +184,10 @@ function TeaserSection() {
       <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
         <div style={{ opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(24px)", transition: "all .9s cubic-bezier(.22,1,.36,1)" }}>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: 0 }}>
-            Parce que les moments les plus précieux se partagent en toute intimité, nous avons imaginé une journée à notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entourée de ceux qui comptent vraiment.
+            Parce que les moments les plus precieux se partagent en toute intimite, nous avons imagine une journee a notre image : <em style={{ color: C.gold }}>simple, joyeuse</em> et entouree de ceux qui comptent vraiment.
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(17px,3.2vw,20px)", color: C.soft, lineHeight: 1.85, margin: "18px 0 0" }}>
-            De la mairie aux éclats de rire du vin d'honneur, jusqu'à la douceur du soir — rejoignez-nous pour écrire cette nouvelle page.
+            De la mairie aux eclats de rire du vin d'honneur, jusqu'a la douceur du soir — rejoignez-nous pour ecrire cette nouvelle page.
           </p>
         </div>
         <Divider />
@@ -206,7 +199,7 @@ function TeaserSection() {
         }}>
           <div style={{ position: "absolute", top: -18, left: -18, width: 60, height: 60, borderRadius: "50%", background: `radial-gradient(circle, ${C.goldLight}33, transparent)` }} />
           <span style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 38, color: C.gold, lineHeight: 0.6, display: "block", marginBottom: 12 }}>"</span>
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "clamp(17px,3vw,20px)", color: C.charcoal, lineHeight: 1.75, margin: 0, whiteSpace: "pre-line" }}>
+          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "clamp(17px,3vw,20px)", color: C.charcoal, lineHeight: 1.75, margin: 0 }}>
             {biblQuote.fr}
           </p>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 14, color: C.gold, letterSpacing: 1, marginTop: 16, marginBottom: 0 }}>{biblQuote.ref}</p>
@@ -216,7 +209,6 @@ function TeaserSection() {
   );
 }
 
-// ─── TIMELINE ─────────────────────────────────────────────
 function TimelineSection() {
   const [visItems, setVisItems] = useState([]);
   const refs = useRef([]);
@@ -234,7 +226,7 @@ function TimelineSection() {
     <section style={{ padding: "80px 24px 90px", background: `linear-gradient(180deg, ${C.cream} 0%, ${C.creamDark} 100%)` }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(26px,5.5vw,38px)", fontWeight: 400, color: C.charcoal, textAlign: "center", margin: "0 0 6px" }}>
-          Le déroulé de la journée
+          Le deroule de la journee
         </h2>
         <Divider />
         <div style={{ position: "relative", marginTop: 48 }}>
@@ -273,7 +265,6 @@ function TimelineSection() {
   );
 }
 
-// ─── RSVP ─────────────────────────────────────────────────
 function RSVPSection({ submitted, setSubmitted }) {
   const [step, setStep] = useState(0);
   const [accepted, setAccepted] = useState(null);
@@ -298,18 +289,17 @@ function RSVPSection({ submitted, setSubmitted }) {
     <section style={{ minHeight: "100vh", padding: "80px 24px 100px", background: `linear-gradient(180deg, ${C.creamDark} 0%, ${C.cream} 100%)`, display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div style={{ maxWidth: 660, width: "100%", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(24px,5vw,36px)", fontWeight: 400, color: C.charcoal, margin: "0 0 6px" }}>
-          Répondre à l'invitation
+          Repondre a l'invitation
         </h2>
         <Divider />
 
-        {/* STEP 0 */}
         {step === 0 && (
           <div style={{ opacity: anim ? 0 : 1, transform: anim ? "translateY(10px)" : "translateY(0)", transition: "all .32s ease", marginTop: 40 }}>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 19, color: C.soft, marginBottom: 40 }}>
-              Souhaitez-vous nous faire l'honneur de votre présence ?
+              Souhaitez-vous nous faire l'honneur de votre presence ?
             </p>
             <div style={{ display: "flex", gap: 18, justifyContent: "center", flexWrap: "wrap" }}>
-              {[{ lbl: "Avec joie !", val: true, ico: "💐" }, { lbl: "Désolé, absent", val: false, ico: "🌹" }].map((o) => {
+              {[{ lbl: "Avec joie !", val: true, ico: "💐" }, { lbl: "Desole, absent", val: false, ico: "🌹" }].map((o) => {
                 const sel = accepted === o.val;
                 return (
                   <button key={String(o.val)} onClick={() => setAccepted(o.val)} style={{
@@ -328,7 +318,7 @@ function RSVPSection({ submitted, setSubmitted }) {
             </div>
             {accepted !== null && (
               <div style={{ marginTop: 38, animation: "pop .4s cubic-bezier(.22,1,.36,1)" }}>
-                <button onClick={() => { if (accepted) transition(() => setStep(1)); else { saveRSVP([{ name: "Invité anonyme", drinks: [], allergies: [], song: "" }], false); setStep(2); setSubmitted(true); } }}
+                <button onClick={() => { if (accepted) transition(() => setStep(1)); else { saveRSVP([{ name: "Invite anonyme", drinks: [], allergies: [], song: "" }], false); setStep(2); setSubmitted(true); } }}
                   style={{
                     fontFamily: "'Cormorant Garamond',serif", fontSize: 15, letterSpacing: 3.5, textTransform: "uppercase",
                     background: C.gold, color: C.white, border: "none", padding: "13px 44px", borderRadius: 40, cursor: "pointer",
@@ -343,21 +333,20 @@ function RSVPSection({ submitted, setSubmitted }) {
           </div>
         )}
 
-        {/* STEP 1 */}
         {step === 1 && (
           <div style={{ opacity: anim ? 0 : 1, transform: anim ? "translateY(10px)" : "translateY(0)", transition: "all .32s ease", marginTop: 36, textAlign: "left" }}>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 18, color: C.soft, textAlign: "center", marginBottom: 34 }}>
-              Complétez les détails pour chaque invité
+              Completez les details pour chaque invite
             </p>
             {guests.map((g, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 22, padding: "28px 24px", marginBottom: 18, border: `1px solid ${C.goldLight}44`, boxShadow: "0 4px 22px rgba(0,0,0,.05)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
-                  <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 16, color: C.gold }}>Invité {i + 1}</span>
+                  <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 16, color: C.gold }}>Invite {i + 1}</span>
                   {i > 0 && <button onClick={() => setGuests(guests.filter((_, x) => x !== i))} style={{ background: "none", border: "none", color: C.blush, cursor: "pointer", fontSize: 20 }}>✕</button>}
                 </div>
-                <input type="text" placeholder="Prénom & Nom" value={g.name} onChange={(e) => upd(i, "name", e.target.value)}
+                <input type="text" placeholder="Prenom & Nom" value={g.name} onChange={(e) => upd(i, "name", e.target.value)}
                   style={{ width: "100%", boxSizing: "border-box", padding: "12px 16px", borderRadius: 14, border: `1px solid ${C.goldLight}88`, fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.charcoal, background: C.cream, outline: "none", marginBottom: 22 }} />
-                <Label>🥂 Préférence de boisson</Label>
+                <Label>🥂 Preference de boisson</Label>
                 <Chips options={drinks} selected={g.drinks} onTog={(v) => tog(i, "drinks", v)} color={C.gold} />
                 <Label top={22}>⚠️ Allergies alimentaires</Label>
                 <Chips options={allergens} selected={g.allergies} onTog={(v) => tog(i, "allergies", v)} color={C.blush} />
@@ -368,7 +357,7 @@ function RSVPSection({ submitted, setSubmitted }) {
             ))}
             <div style={{ textAlign: "center", marginTop: 8 }}>
               <button onClick={addGuest} style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, background: "transparent", border: `1px dashed ${C.gold}`, color: C.gold, padding: "10px 26px", borderRadius: 32, cursor: "pointer" }}>
-                + Ajouter un invité
+                + Ajouter un invite
               </button>
             </div>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", marginTop: 38 }}>
@@ -386,7 +375,6 @@ function RSVPSection({ submitted, setSubmitted }) {
           </div>
         )}
 
-        {/* STEP 2 */}
         {step === 2 && (
           <div style={{ marginTop: 64, animation: "pop .6s cubic-bezier(.22,1,.36,1)", textAlign: "center" }}>
             <div style={{ fontSize: 60, marginBottom: 18 }}>{accepted ? "💐" : "🌹"}</div>
@@ -394,7 +382,7 @@ function RSVPSection({ submitted, setSubmitted }) {
               {accepted ? "Merci !" : "Nous le regrettons"}
             </h3>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 18, color: C.soft, maxWidth: 440, margin: "0 auto", lineHeight: 1.7 }}>
-              {accepted ? "Votre présence nous fera beaucoup de joie. À bientôt le 10 avril !" : "Nous espérons vous revoir bientôt. Encore merci pour votre message."}
+              {accepted ? "Votre presence nous fera beaucoup de joie. A bientot le 10 avril !" : "Nous esperons vous revoir bientot. Encore merci pour votre message."}
             </p>
             <Divider tight />
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Gabriella & Deogratias</p>
@@ -405,7 +393,6 @@ function RSVPSection({ submitted, setSubmitted }) {
   );
 }
 
-// ─── STICKY RSVP BUTTON ───────────────────────────────────
 function StickyRSVP({ onClick, show }) {
   return (
     <div style={{
@@ -427,14 +414,12 @@ function StickyRSVP({ onClick, show }) {
   );
 }
 
-// ─── APP ──────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState("hero");
   const [tab, setTab] = useState("teaser");
   const [submitted, setSubmitted] = useState(false);
   const rsvpRef = useRef(null);
 
-  // Increment visit counter on load
   useEffect(() => { incrementVisits(); }, []);
 
   const goRSVP = () => {
@@ -459,7 +444,7 @@ export default function App() {
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               {[
                 { k: "teaser", lbl: "Notre histoire", ico: "🌸" },
-                { k: "timeline", lbl: "Déroulé", ico: "✨" },
+                { k: "timeline", lbl: "Deroule", ico: "✨" },
                 { k: "rsvp", lbl: "RSVP", ico: "💌" },
               ].map((t) => (
                 <button key={t.k} onClick={() => setTab(t.k)} style={{
