@@ -23,7 +23,7 @@ const drinks = ["Champagne", "Vin Rouge", "Vin Blanc", "Cocktail Signature", "Ju
 const allergens = ["Gluten", "Lactose", "Noix", "Œufs", "Aucune allergie"];
 
 const biblQuote = {
-  fr: "« C'est par l sagesse qu'une maison s'élève,\net par l'intelligence qu'elle s'affermit. »",
+  fr: "« C'est par la sagesse qu'une maison s'élève,\net par l'intelligence qu'elle s'affermit. »",
   ref: "— Proverbes 24:3",
 };
 
