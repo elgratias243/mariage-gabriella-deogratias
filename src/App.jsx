@@ -30,10 +30,10 @@ const biblQuote = {
 // Photos du couple (à remplacer par vos vraies photos)
 const HERO_PHOTO = "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_6365.JPEG"; // Photo principale
 const BG_PHOTOS = [
-  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_5140.JPEG",
-  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_6412.JPEG",
-  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_6284.JPEG",
-  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/0W2A2961.JPG",
+  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_5140.jpeg",
+  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_6412.jpeg",
+  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/IMG_6284.jpeg",
+  "https://ouwxiqtaoprnwl63.public.blob.vercel-storage.com/0W2A2961.jpg",
 ];
 
 const STORAGE_KEY = "wedding-rsvp-responses";
