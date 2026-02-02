@@ -205,7 +205,7 @@ function CouplePhoto({ onContinue }) {
           fontWeight: 400, color: C.white, lineHeight: 1.3, margin: 0,
           textShadow: "0 4px 30px rgba(0,0,0,0.9)",
         }}>
-          Gabriella & Deogratias
+          Deogratias & Gabriella
         </h1>
 
         <button onClick={onContinue} style={{
