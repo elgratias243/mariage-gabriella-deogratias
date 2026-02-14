@@ -545,7 +545,7 @@ export default function App() {
           <nav style={{ position: "sticky", top: 0, zIndex: 100, background: `${C.cream}ee`, backdropFilter: "blur(14px)", borderBottom: `1px solid ${C.goldLight}55`, padding: "15px 0" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               {[
-                { k: "teaser", lbl: "Notre histoire", ico: "" },
+                { k: "teaser", lbl: "Le Mot des Mariés", ico: "" },
                 { k: "timeline", lbl: "Déroulé", ico: "" },
                 { k: "rsvp", lbl: "Serez-vous des nôtres ?", ico: "💌" },
               ].map((t) => (
