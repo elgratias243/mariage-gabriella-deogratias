@@ -189,7 +189,7 @@ function CouplePhoto({ onContinue }) {
           fontFamily: "'Playfair Display',serif", fontSize: "clamp(36px,8vw,64px)",
           fontWeight: 400, color: C.white, lineHeight: 1.3, margin: 0,
           textShadow: "0 4px 30px rgba(0,0,0,0.9)",
-        }}>Gabriella & Deogratias</h1>
+        }}>Deogratias & Gabriella</h1>
         <button onClick={onContinue} style={{
           marginTop: 48, fontFamily: "'Cormorant Garamond',serif", fontSize: 14, letterSpacing: 4,
           textTransform: "uppercase", background: "rgba(201,168,76,0.15)", backdropFilter: "blur(10px)",
@@ -484,7 +484,7 @@ function RSVPSection({ submitted, setSubmitted }) {
               {accepted ? "Votre présence nous fera beaucoup de joie. À bientôt le 10 avril !" : "Nous espérons vous revoir bientôt. Encore merci pour votre message."}
             </p>
             <Divider tight />
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Gabriella & Deogratias</p>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, color: C.gold, letterSpacing: 2, marginTop: 18 }}>Deogratias & Gabriella</p>
           </div>
         )}
       </div>
@@ -567,7 +567,7 @@ export default function App() {
 
           <footer style={{ textAlign: "center", padding: "52px 24px 64px", background: C.cream, position: "relative" }}>
             <Divider />
-            <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 400, color: C.charcoal, margin: "18px 0 4px" }}>Gabriella & Deogratias</p>
+            <p style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 400, color: C.charcoal, margin: "18px 0 4px" }}>Deogratias & Gabriella</p>
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: C.soft, margin: 0 }}>10 Avril 2026</p>
           </footer>
 
