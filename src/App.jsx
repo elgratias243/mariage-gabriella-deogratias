@@ -545,9 +545,9 @@ export default function App() {
           <nav style={{ position: "sticky", top: 0, zIndex: 100, background: `${C.cream}ee`, backdropFilter: "blur(14px)", borderBottom: `1px solid ${C.goldLight}55`, padding: "15px 0" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               {[
-                { k: "teaser", lbl: "Notre histoire", ico: "🌸" },
-                { k: "timeline", lbl: "Déroulé", ico: "✨" },
-                { k: "rsvp", lbl: "RSVP", ico: "💌" },
+                { k: "teaser", lbl: "Notre histoire", ico: "" },
+                { k: "timeline", lbl: "Déroulé", ico: "" },
+                { k: "rsvp", lbl: "Serez-vous des nôtres ?", ico: "💌" },
               ].map((t) => (
                 <button key={t.k} onClick={() => setTab(t.k)} style={{
                   fontFamily: "'Cormorant Garamond',serif", fontSize: 15.5, letterSpacing: 1.8, textTransform: "uppercase",
